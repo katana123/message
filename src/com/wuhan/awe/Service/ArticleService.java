@@ -17,8 +17,10 @@ public class ArticleService {
     @Autowired
     private ArticleRepositry articleRepositry;
 
+    //删除一个article对象
     @Transactional
     public void delete(Integer id){ articleRepositry.delete(id);}
+
 
     //获取一个article对象
     @Transactional(readOnly = true)

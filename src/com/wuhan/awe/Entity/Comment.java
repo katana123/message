@@ -58,7 +58,7 @@ public class Comment {
     }
 
     @JoinColumn(name = "ARTICLE_ID")
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.LAZY, cascade=CascadeType.ALL)
     public Article getArticle() {
         return article;
     }
