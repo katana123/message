@@ -75,7 +75,7 @@
         <c:forEach items="${page.content}" var="article">
         <tr>
           <td>${article.id}</td>
-          <td><a href="#">${article.title}</a></td>
+          <td><a href="${pageContext.request.contextPath }/article/read/${article.id}">${article.title}</a></td>
           <td>2</td>
           <td>
               <fmt:formatDate value="${article.createTime}" pattern="yyyy-MM-dd hh:mm:ss"/>
@@ -136,7 +136,6 @@
             </li>
           </c:otherwise>
         </c:choose>
-
       </ul>
     </nav>
     <div class="well">
