@@ -6,7 +6,7 @@ import java.util.Date;
 @Table(name = "comment")
 @Entity
 public class Comment {
-    private Integer id;
+    private Integer cid;
     private String content;
     private Date createTime;
     private Date updateTime;
@@ -15,12 +15,12 @@ public class Comment {
 
     @GeneratedValue
     @Id
-    public Integer getId() {
-        return id;
+    public Integer getCid() {
+        return cid;
     }
 
-    public void setId(Integer id) {
-        this.id = id;
+    public void setCid(Integer cid) {
+        this.cid = cid;
     }
 
     public String getContent() {

@@ -8,6 +8,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <html>
   <head>
     <title>SSSP 留言板</title>
@@ -58,6 +59,7 @@
         <td>编号</td>
         <td>标题</td>
         <td>评论</td>
+
         <td>发布日期</td>
         <td>操作</td>
       </tr>
@@ -70,13 +72,13 @@
       </tr>
       </c:if>
 
-
       <c:if test="${page != null && page.numberOfElements > 0 }">
         <c:forEach items="${page.content}" var="article">
         <tr>
           <td>${article.id}</td>
           <td><a href="${pageContext.request.contextPath }/article/read/${article.id}">${article.title}</a></td>
-          <td>2</td>
+          <td><c:out value="${fn:length(article.comments)}"></c:out></td>
+
           <td>
               <fmt:formatDate value="${article.createTime}" pattern="yyyy-MM-dd hh:mm:ss"/>
           </td>

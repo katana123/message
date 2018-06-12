@@ -3,6 +3,8 @@ package com.wuhan.awe.Entity;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Date;
 
 @Table(name = "article")
@@ -15,6 +17,16 @@ public class Article {
     private String title;
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date updateTime;
+    private Collection<Comment> comments = new ArrayList<>();
+
+    @OneToMany(cascade = {CascadeType.ALL}, fetch = FetchType.LAZY, mappedBy = "article")
+    public Collection<Comment> getComments() {
+        return comments;
+    }
+
+    public void setComments(Collection<Comment> comments) {
+        this.comments = comments;
+    }
 
     @GeneratedValue
     @Id
@@ -58,5 +70,17 @@ public class Article {
 
     public void setUpdateTime(Date updateTime) {
         this.updateTime = updateTime;
+    }
+
+    @Override
+    public String toString() {
+        return "Article{" +
+                "id=" + id +
+                ", content='" + content + '\'' +
+                ", createTime=" + createTime +
+                ", title='" + title + '\'' +
+                ", updateTime=" + updateTime +
+                ", comments=" + comments +
+                '}';
     }
 }

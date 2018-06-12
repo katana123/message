@@ -1,9 +1,13 @@
 package com.wuhan.awe.Handler;
 
 import com.wuhan.awe.Entity.Article;
+import com.wuhan.awe.Repositry.ArticleRepositry;
 import com.wuhan.awe.Service.ArticleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -18,6 +22,8 @@ public class ArticleHandler {
 
     @Autowired
     private ArticleService articleService;
+    @Autowired
+    private ArticleRepositry articleRepositry;
 
     //完成删除并跳转到List页面
     @RequestMapping(value="/article/{id}",method=RequestMethod.DELETE)
@@ -58,7 +64,7 @@ public class ArticleHandler {
     }
 
     //分页显示
-    @RequestMapping("/articles")
+    @RequestMapping(value = "aaa", method = RequestMethod.GET)
     public String list(@RequestParam(value = "pageNo", required = false,defaultValue = "1") String pageNoStr,
                        Map<String, Object> map){
         int pageNo = 1;
@@ -70,8 +76,28 @@ public class ArticleHandler {
             }
         } catch (Exception e) {}
 
-        Page<Article> page = articleService.getPage(pageNo, 5);
+        Page<Article> page = articleService.getPage(pageNo - 1, 5);
         map.put("page", page);
+        return "/article/list";
+    }
+
+
+    @RequestMapping("/articles")
+    public String getEntryByPageable(@RequestParam(value = "pageNo", required = false, defaultValue = "1") String pageNoStr,
+                                     Map<String, Object> map) {
+        int pageNo = 1;
+
+        try {
+            pageNo = Integer.parseInt(pageNoStr);
+            if (pageNo < 1) {
+                pageNo = 1;
+            }
+        } catch (Exception e) {
+        }
+
+        Page<Article> page = articleService.getArticleByPageable(pageNo - 1, 5);
+        map.put("page", page);
+
         return "/article/list";
     }
 
