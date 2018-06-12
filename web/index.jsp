@@ -21,7 +21,9 @@
         </div>
       </div>
     </nav>
-    <a href="articles">进入</a>
+      <a href="articles">进入JpaSpecificationExecutor连表分页</a>
+      <br/>
+      <a href="aaa">进入原生sql分页</a>
 
     <div class="well">
       用SSSP开发的一款留言本
