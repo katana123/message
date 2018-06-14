@@ -19,7 +19,7 @@ public class Article {
     private Date updateTime;
     private Collection<Comment> comments = new ArrayList<>();
 
-    @OneToMany(cascade = {CascadeType.ALL}, fetch = FetchType.LAZY, mappedBy = "article")
+
     public Collection<Comment> getComments() {
         return comments;
     }
